@@ -1,0 +1,13 @@
+<%= flash[:welcome] %>
+
+
+<h1>All Your Feline Clients!</h1>
+<ul>
+  <% @cats.each do |cat| %>
+  
+  <li><a href="<%= cat_url(cat) %>"><%= cat.name %></a></li>
+ 
+  <% end %>
+</ul>
+
+<!-- <%= link_to "Create new cat!", new_cat_url %> -->
