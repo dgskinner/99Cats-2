@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :cats do
+  resources :cats, except: [:index] do
     resources :cat_rental_requests, only: [:index]
   end
   
@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     post 'deny', :on => :member
   end
   
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create] do
+    resources :cats, only: [:index]
+  end
   
   resource :session, only: [:new, :create, :destroy]
   

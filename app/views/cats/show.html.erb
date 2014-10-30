@@ -28,8 +28,8 @@
         <td>Rental Requests:</td>
         <td><ul>
           <% @requests.each do |request| %>
-                <li><%= [request.start_date, request.end_date].join(", ")%>
-                  <% if request.pending?%>
+                <li><%= [request.start_date, request.end_date].join(", ") + "   " + " Requester: #{request.requester.user_name}" %>
+                  <% if request.pending? && current_user.demands.include?(request)%>
                     <%= button_to "Approve!", approve_cat_rental_request_url(request) %>
                     <%= button_to "Deny!", deny_cat_rental_request_url(request) %>
                   <% end %>

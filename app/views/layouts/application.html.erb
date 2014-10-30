@@ -14,7 +14,7 @@
 <% else %>
   <%= button_to "Click to sign in", new_session_url, method: :get %>
 <% end %>
-<h1><%= flash[:errors] %></h1>
+<h3><%= render partial: "layouts/errors" %></h3>
 <%= yield %>
 
 </body>

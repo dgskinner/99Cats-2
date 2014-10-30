@@ -10,4 +10,9 @@
   <% end %>
 </ul>
 
-<!-- <%= link_to "Create new cat!", new_cat_url %> -->
+<%= button_to "Add a new cat", new_cat_url, method: :get %>
+
+<br>
+<br>
+
+<%= button_to "Request a cat", new_cat_rental_request_url, method: :get %>

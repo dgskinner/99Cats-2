@@ -13,11 +13,13 @@ class SessionsController < ApplicationController
     )
 
     if user.nil?
-      render json: "Credentials were wrong"
+      flash.now[:errors] ||= []
+      flash.now[:errors] << "Bad username/password combination"
+      render :new
     else
       login!(user)
       flash[:welcome] = "Welcome back, #{user.user_name}!"
-      redirect_to cats_url
+      redirect_to user_cats_url(current_user)
     end
   end
   

@@ -5,11 +5,12 @@ class UsersController < ApplicationController
   end
   
   def create
+    fail
     @user = User.new(user_params)
     if @user.save
       login!(@user)
       flash[:welcome] = "Welcome, #{@user.user_name}!"
-      redirect_to cats_url
+      redirect_to user_cats_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new

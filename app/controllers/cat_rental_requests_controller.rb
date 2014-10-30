@@ -1,7 +1,8 @@
 class CatRentalRequestsController < ApplicationController
+  before_action :require_loggedin, only: [:approve, :deny]  
   
   def create
-    @request = CatRentalRequest.new(rental_params)
+    @request = current_user.requests.new(rental_params)
    
     if @request.save
       redirect_to cat_url(@request.cat)
@@ -13,7 +14,7 @@ class CatRentalRequestsController < ApplicationController
   end
   
   def approve
-    @request = CatRentalRequest.includes(:cat).find(params[:id])
+    @request = current_user.demands.includes(:cat).find(params[:id])
     
     flash.now[:errors] = @request.errors.full_messages unless @request.approve!
     
@@ -21,7 +22,7 @@ class CatRentalRequestsController < ApplicationController
   end
   
   def deny
-    @request = CatRentalRequest.includes(:cat).find(params[:id])  
+    @request = current_user.demands.includes(:cat).find(params[:id])  
     
     flash.now[:errors] = @request.errors.full_messages unless @request.deny!
 
@@ -30,7 +31,7 @@ class CatRentalRequestsController < ApplicationController
   
   def new
     @cats = Cat.all
-    @request = CatRentalRequest.new
+    @request = current_user.requests.new
     render :new
   end
   
